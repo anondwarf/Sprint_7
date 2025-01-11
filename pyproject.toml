@@ -1,0 +1,55 @@
+[project]
+name = "sprint-7"
+version = "0.1.0"
+description = ""
+authors = [
+    { name = "Anton Bogomolov", email = "ashteriel@ya.ru" }
+]
+readme = "README.md"
+requires-python = ">=3.13"
+
+
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.group.local.dependencies]
+isort = "^5.13.2"
+mypy = "^1.14.1"
+bandit = "^1.8.0"
+black = "^24.10.0"
+
+[tool.poetry.dependencies]
+pytest = "^8.3.4"
+allure-pytest = "^2.13.5"
+requests = "^2.32.3"
+python-dotenv = "^1.0.1"
+jsonschema = "^4.23.0"
+pydantic = "^2.10.5"
+pydantic-settings = "^2.7.1"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--alluredir", "allure-results",
+    "--clean-alluredir"
+]
+testpaths = ["tests"]
+disable_test_id_escaping_and_forfeit_all_rights_to_community_support = true
+norecursedirs = [".git", ".venv"]
+python_files = "test_*.py"
+python_functions = "test_*"
+log_cli = true
+log_cli_level = "INFO"
+filterwarnings = "ignore"
+
+[tool.isort]
+profile = "black"
+py_version = "3"
+
+[tool.mypy]
+python_version = "313"
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.black]
+line-length = 80
+target-version = ['py313']
