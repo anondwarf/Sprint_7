@@ -1,5 +1,6 @@
 from os import getenv
 
+import allure
 from pytest import mark
 from requests import post
 
@@ -8,6 +9,7 @@ from utilities.enums import ApiEndPoints, ResponseCode, ResponseText
 
 class TestCreateCourier:
 
+    @allure.title(test_title="Проверка создания нового курьера")
     @mark.usefixtures("courier_new")
     @mark.parametrize(
         "response_status, response_data",
@@ -30,6 +32,7 @@ class TestCreateCourier:
         assert response.status_code == response_status
         assert response.json() == response_data
 
+    @allure.title(test_title="Проверка обязательности ключей")
     @mark.parametrize(
         "bad_payload_new_courier, response_status, response_data",
         [

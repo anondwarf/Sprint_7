@@ -1,5 +1,6 @@
 import os
 
+import allure
 import pytest
 import requests
 
@@ -9,6 +10,7 @@ from utilities.helpers import check_exists_key, check_string_regexp
 
 class TestCreateOrder:
 
+    @allure.title(test_title="Проверка ключа `color` при формировании заказа")
     @pytest.mark.parametrize(
         "generate_order_payloads",
         [

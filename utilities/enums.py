@@ -6,6 +6,7 @@ class ApiEndPoints(Enum):
     LOGIN_COURIER = "/api/v1/courier/login"
     GET_ORDER_LIST = "/api/v1/orders"
     CREATE_ORDER = "/api/v1/orders"
+    DELETE_COURIER = "/api/v1/courier/"
 
 
 class ResponseCode(Enum):
@@ -31,5 +32,7 @@ class ResponseText(Enum):
         "message": "Недостаточно данных для входа",
     }
     LOGIN_NOT_FOUND = {"code": 404, "message": "Учетная запись не найдена"}
-    # GET_ORDER_BAD_REQUEST = "Недостаточно данных для поиска"
-    # GET_ORDER_NOT_FOUND = "Заказ не найден"
+
+
+class RegExp(Enum):
+    NUMBER = r"^([\s\d]+)$"

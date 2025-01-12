@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 
-load_dotenv(".env.example")
+load_dotenv()
 
 pytest_plugins = [
     "fixtures.courier_new",

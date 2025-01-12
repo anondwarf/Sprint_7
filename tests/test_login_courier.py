@@ -1,19 +1,21 @@
 import os
 
+import allure
 import pytest
 import requests
 
-from utilities.enums import ApiEndPoints, ResponseCode, ResponseText
+from utilities.enums import ApiEndPoints, ResponseCode, ResponseText, RegExp
 from utilities.fakers import random_string
 from utilities.helpers import check_exists_key, check_string_regexp
 
 
 class TestLoginCourier:
 
+    @allure.title(test_title="Проверка авторизации курьера")
     @pytest.mark.parametrize(
         "registered_courier, status_code, response_text",
         [
-            ("ok", ResponseCode.OK.value, r"^([\s\d]+)$"),
+            ("ok", ResponseCode.OK.value, RegExp.NUMBER.value),
             (
                 "login",
                 ResponseCode.BAD_REQUEST.value,
@@ -34,6 +36,7 @@ class TestLoginCourier:
         status_code: int,
         response_text: str,
     ) -> None:
+        print(registered_courier)
         response = requests.post(
             url=f"{os.getenv('BASE_URL')}{ApiEndPoints.LOGIN_COURIER.value}",
             data=registered_courier,
@@ -49,6 +52,8 @@ class TestLoginCourier:
                 response_text, str(response.json()["id"])
             )
 
+    @allure.title(
+        test_title="Проверка ошибки авторизации несуществующего курьера")
     @pytest.mark.parametrize(
         "payload, status_code, response_text",
         [
